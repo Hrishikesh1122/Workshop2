@@ -8,7 +8,9 @@
 package service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Scanner;
 
 import model.Card;
@@ -87,13 +89,25 @@ public class DeckOfCards {
 		}
 	}
 	
-	
+	/**
+	 * Shuffles the deck
+	 * uses Collections.swap to swap index i with random index
+	 */
+	private void shuffleDeck() {
+		for(int i=0;i<deck.size();i++)
+		{
+			Random random = new Random();
+			int index=random.nextInt(52);
+			Collections.swap(deck, i, index);		
+		}
+	}
 
 	public static void main(String[] args) {
 		DeckOfCards game = new DeckOfCards();
 		game.buildDeck();
 		game.createPlayers();
 		game.giveSequence();
+		game.shuffleDeck();
 	}
 
 }
