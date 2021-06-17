@@ -9,7 +9,10 @@ package service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
+
 import model.Card;
+import model.Player;
 
 public class DeckOfCards {
 	
@@ -42,11 +45,39 @@ public class DeckOfCards {
 		}
 	}
 	
+	/**
+	 * Creates players according to user input from console
+	 * Checks for condition that number of players should be more than 2 and less than
+	 * or equal to 4. If condition is satisfied it
+	 * Creates objects player of class Player and assigns them a playerName
+	 * Otherwise it asks user to enter number again
+	 */
+	private void createPlayers() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("How many players ? ");
+		int numberOfPlayers = sc.nextInt();
+		
+		if(numberOfPlayers>2 && numberOfPlayers<=4) {
+			Scanner sc1 = new Scanner(System.in);
+			for(int i=1;i<=numberOfPlayers;i++) {
+				System.out.println("Enter player "+i+" name");
+				String name = sc1.nextLine();
+				Player player = new Player(name);	
+			}
+			sc1.close();
+		}
+		else {
+			System.out.println("Number should be more than 2 and less than or equal to 4");
+			createPlayers();
+		}
+	}
+	
 	
 
 	public static void main(String[] args) {
 		DeckOfCards deck = new DeckOfCards();
 		deck.buildDeck();
+		deck.createPlayers();
 	}
 
 }
