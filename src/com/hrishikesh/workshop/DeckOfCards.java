@@ -7,25 +7,40 @@
  *******************************************************************************/
 package com.hrishikesh.workshop;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 public class DeckOfCards {
 	
-	private static String[] suits = new String[] { "CLUB", "DIAMOND", "HEART", "SPADE" };
-	private static String[] ranks = new String[] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
-	private static String[] deck = new String[52];
+	private  String[] suits = new String[] { "CLUB", "DIAMOND", "HEART", "SPADE" };
+	private  String[] ranks = new String[] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
+	private  String[] deck = new String[52];
 
 	/**
 	 * Creates a deck of cards (1D array) from symbols[] and ranks[]
-	 * @return string array deck of cards
+	 * Created HashSet to check if all cards are unique
+	 * If sizes are same it means all cards are unique
+	 * @return string array deck of cards if all cards are unique
+	 * Else return null
 	 */
-	private String[] getDeck() {
+	private String[] buildDeck() {
 		for (int i = 0; i < deck.length; i++)
 			deck[i] = suits[i / 13] + "->" + ranks[i % 13];
-		return deck;
+		
+		Set<String> s = new HashSet<String>(Arrays.asList(deck));
+		
+		if(s.size()==deck.length) {
+			return deck;
+		}
+		else {
+			return null;
+		}
 	}
 
 	public static void main(String[] args) {
-		DeckOfCards d = new DeckOfCards();
-		d.getDeck();
+		DeckOfCards deck = new DeckOfCards();
+		deck.buildDeck();
 	}
 
 }
