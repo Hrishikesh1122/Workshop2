@@ -5,38 +5,44 @@
  * @Since 17-06-2021
  *
  *******************************************************************************/
-package com.hrishikesh.workshop;
+package service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
+import model.Card;
 
 public class DeckOfCards {
 	
 	private  String[] suits = new String[] { "CLUB", "DIAMOND", "HEART", "SPADE" };
 	private  String[] ranks = new String[] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
-	private  String[] deck = new String[52];
+	private  ArrayList<Card> deck = new ArrayList<>(52);
 
 	/**
-	 * Creates a deck of cards (1D array) from symbols[] and ranks[]
+	 * Creates a deck of cards "deck" (ArrayList) from symbols[] and ranks[]
+	 * deck stores objects of class Card.
 	 * Created HashSet to check if all cards are unique
 	 * If sizes are same it means all cards are unique
-	 * @return string array deck of cards if all cards are unique
-	 * Else return null
+	 * @return 1 if all cards are unique
+	 * Else return 0
 	 */
-	private String[] buildDeck() {
-		for (int i = 0; i < deck.length; i++)
-			deck[i] = suits[i / 13] + "->" + ranks[i % 13];
+	private int buildDeck() {
 		
-		Set<String> checkSet = new HashSet<String>(Arrays.asList(deck));
+		for(int i=0;i<52;i++) {
+			Card newcard = new Card(suits[i/13],ranks[i%13]);
+			deck.add(newcard);
+		}
 		
-		if(checkSet.size()==deck.length) {
-			return deck;
+		HashSet<Object> hashSet = new HashSet<>(deck);
+		
+		if(hashSet.size()==deck.size()) {
+			return 1;
 		}
 		else {
-			return null;
+			return 0;
 		}
 	}
+	
+	
 
 	public static void main(String[] args) {
 		DeckOfCards deck = new DeckOfCards();
