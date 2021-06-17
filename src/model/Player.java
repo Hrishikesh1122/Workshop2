@@ -2,6 +2,15 @@ package model;
 
 public class Player {
 	String playerName;
+	int sequenceNumber;
+
+	public int getSequenceNumber() {
+		return sequenceNumber;
+	}
+
+	public void setSequenceNumber(int sequenceNumber) {
+		this.sequenceNumber = sequenceNumber;
+	}
 
 	@Override
 	public String toString() {

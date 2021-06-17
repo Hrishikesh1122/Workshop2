@@ -19,6 +19,9 @@ public class DeckOfCards {
 	private  String[] suits = new String[] { "CLUB", "DIAMOND", "HEART", "SPADE" };
 	private  String[] ranks = new String[] { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
 	private  ArrayList<Card> deck = new ArrayList<>(52);
+	private  ArrayList<Player> team = new ArrayList<>();
+	private int numberOfPlayers;
+	private Scanner scanner = new Scanner(System.in);
 
 	/**
 	 * Creates a deck of cards "deck" (ArrayList) from symbols[] and ranks[]
@@ -55,16 +58,17 @@ public class DeckOfCards {
 	private void createPlayers() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("How many players ? ");
-		int numberOfPlayers = sc.nextInt();
+		numberOfPlayers = sc.nextInt();
 		
 		if(numberOfPlayers>2 && numberOfPlayers<=4) {
 			Scanner sc1 = new Scanner(System.in);
 			for(int i=1;i<=numberOfPlayers;i++) {
 				System.out.println("Enter player "+i+" name");
 				String name = sc1.nextLine();
-				Player player = new Player(name);	
+				Player player = new Player(name);
+				team.add(player);
 			}
-			sc1.close();
+	
 		}
 		else {
 			System.out.println("Number should be more than 2 and less than or equal to 4");
@@ -72,12 +76,24 @@ public class DeckOfCards {
 		}
 	}
 	
+	/**
+	 * Gives turns to users
+	 * Takes user input against each player name from console
+	 */
+	private void giveSequence() {
+		for(int i=0;i<numberOfPlayers;i++) {
+			System.out.println("Set turn for "+team.get(i).getPlayerName()+" ");
+			team.get(i).setSequenceNumber(scanner.nextInt());	
+		}
+	}
+	
 	
 
 	public static void main(String[] args) {
-		DeckOfCards deck = new DeckOfCards();
-		deck.buildDeck();
-		deck.createPlayers();
+		DeckOfCards game = new DeckOfCards();
+		game.buildDeck();
+		game.createPlayers();
+		game.giveSequence();
 	}
 
 }
