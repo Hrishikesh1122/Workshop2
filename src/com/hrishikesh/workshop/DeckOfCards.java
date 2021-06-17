@@ -28,9 +28,9 @@ public class DeckOfCards {
 		for (int i = 0; i < deck.length; i++)
 			deck[i] = suits[i / 13] + "->" + ranks[i % 13];
 		
-		Set<String> s = new HashSet<String>(Arrays.asList(deck));
+		Set<String> checkSet = new HashSet<String>(Arrays.asList(deck));
 		
-		if(s.size()==deck.length) {
+		if(checkSet.size()==deck.length) {
 			return deck;
 		}
 		else {
